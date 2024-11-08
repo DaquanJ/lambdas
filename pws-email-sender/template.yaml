@@ -20,7 +20,7 @@ Resources:
       CodeUri: email_sender/  # Update with the directory where your Lambda function code is stored
       Environment:
         Variables:
-          AWS_REGION: "us-east-1"  # Adjust to your region
+          AWS_REGION: os.environ['AWS_REGION'] # Adjust to your region
       Events:
         SendEmailApi:
           Type: Api
@@ -39,7 +39,7 @@ Resources:
 Outputs:
   SendEmailApi:
     Description: API Gateway endpoint URL for SendEmail function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/send-email/"
+    Value: !Sub os.environ['API_GATEWAY_URL']
   SendEmailFunction:
     Description: SendEmail Lambda Function ARN
     Value: !GetAtt SendEmailFunction.Arn
